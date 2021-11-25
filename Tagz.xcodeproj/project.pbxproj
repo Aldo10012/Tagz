@@ -18,6 +18,7 @@
 		6343CDBF274EF8BE008B2140 /* TagzTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343CDBE274EF8BE008B2140 /* TagzTests.swift */; };
 		6343CDC9274EF8BE008B2140 /* TagzUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343CDC8274EF8BE008B2140 /* TagzUITests.swift */; };
 		6343CDCB274EF8BE008B2140 /* TagzUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343CDCA274EF8BE008B2140 /* TagzUITestsLaunchTests.swift */; };
+		6343CDD8274EFF41008B2140 /* AnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343CDD7274EFF41008B2140 /* AnalogJoystick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		6343CDC4274EF8BE008B2140 /* TagzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TagzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6343CDC8274EF8BE008B2140 /* TagzUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagzUITests.swift; sourceTree = "<group>"; };
 		6343CDCA274EF8BE008B2140 /* TagzUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagzUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6343CDD7274EFF41008B2140 /* AnalogJoystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				6343CDA8274EF8BB008B2140 /* Actions.sks */,
 				6343CDAA274EF8BB008B2140 /* GameScene.swift */,
 				6343CDAC274EF8BB008B2140 /* GameViewController.swift */,
+				6343CDD7274EFF41008B2140 /* AnalogJoystick.swift */,
 				6343CDAE274EF8BB008B2140 /* Main.storyboard */,
 				6343CDB1274EF8BD008B2140 /* Assets.xcassets */,
 				6343CDB3274EF8BD008B2140 /* LaunchScreen.storyboard */,
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6343CDAB274EF8BB008B2140 /* GameScene.swift in Sources */,
+				6343CDD8274EFF41008B2140 /* AnalogJoystick.swift in Sources */,
 				6343CDAD274EF8BB008B2140 /* GameViewController.swift in Sources */,
 				6343CDA5274EF8BB008B2140 /* AppDelegate.swift in Sources */,
 			);

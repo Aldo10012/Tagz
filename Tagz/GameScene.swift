@@ -61,7 +61,6 @@ class GameScene: SKScene {
         // runs when joystick moves
         analogJoystick.on(.move) { [unowned self] joystick in
             let pVelocity = joystick.velocity;
-            let speed = playerSpeed
             
             playerNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             playerNode.physicsBody?.applyImpulse(CGVector(dx: pVelocity.x * playerSpeed,
@@ -176,6 +175,7 @@ extension GameScene: SKPhysicsContactDelegate {
         switch collision {
         case playerMask | enemyMask:
             print("player & enemy")
+            presentGameOverScene()
             
         case playerMask | obstacleMask:
             print("player & obstacle")
@@ -186,6 +186,13 @@ extension GameScene: SKPhysicsContactDelegate {
         default:
             break
         }
+    }
+    
+    func presentGameOverScene() {
+        let gameOverScene = GameOverScene(fileNamed: "GameOver")
+        
+        gameOverScene!.scaleMode = .aspectFill
+        view?.presentScene(gameOverScene)
     }
     
 }

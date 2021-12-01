@@ -59,13 +59,15 @@ class GameScene: SKScene {
         addChild(analogJoystick)
         
         // runs when joystick moves
-        analogJoystick.on(.move) { [unowned self] joystick in
+        analogJoystick.on(.move) { [weak self] joystick in
             let pVelocity = joystick.velocity;
             
-            playerNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            playerNode.physicsBody?.applyImpulse(CGVector(dx: pVelocity.x * playerSpeed,
-                                                          dy: pVelocity.y * playerSpeed))
-            playerNode.zRotation = joystick.angular
+            guard let self = self else {return}
+            
+            self.playerNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            self.playerNode.physicsBody?.applyImpulse(CGVector(dx: pVelocity.x * self.playerSpeed,
+                                                                dy: pVelocity.y * self.playerSpeed))
+            self.playerNode.zRotation = joystick.angular
         }
         
         analogJoystick.on(.end) { [unowned self] joystick in

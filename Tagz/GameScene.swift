@@ -54,7 +54,7 @@ class GameScene: SKScene {
         
     }
     
-    // MARK: Helpers
+    // MARK: JoyStick Controlls
     func setupJoyStick() {
         addChild(analogJoystick)
         
@@ -74,7 +74,11 @@ class GameScene: SKScene {
         }
         
     }
-    
+}
+
+
+// MARK: Enemy Mechanics
+extension GameScene {
     func rotateEnemyNodeToFacePlayerNode() {
         let dy = playerNode.position.y - enemyNode.position.y
         let dx = playerNode.position.x - enemyNode.position.x
@@ -98,7 +102,7 @@ class GameScene: SKScene {
         let dx = dx
         let dy = dy
         let hyp = sqrt((dx * dx) + (dy * dy))
-        // hyp should always be 100
+        // hyp should always be 50
         
         let lowerBound: CGFloat = 48 * enemySpeed
         let upperBound: CGFloat = 52 * enemySpeed
@@ -116,9 +120,8 @@ class GameScene: SKScene {
         }
         
     }
-    
-    
 }
+
 
 // MARK: Physics Bodies
 extension GameScene {
@@ -145,6 +148,11 @@ extension GameScene {
         enemyNode.physicsBody?.contactTestBitMask = PhysicsCatagory.Player | PhysicsCatagory.Edge | PhysicsCatagory.Obstacle
         
         // set up obstacle physics
+        enumerateChildNodes(withName: "obstacle") { objectNode, _ in
+            objectNode.physicsBody?.categoryBitMask = PhysicsCatagory.Obstacle
+            objectNode.physicsBody?.collisionBitMask = PhysicsCatagory.Enemy | PhysicsCatagory.Player
+            objectNode.physicsBody?.contactTestBitMask = PhysicsCatagory.Enemy  | PhysicsCatagory.Player
+        }
     }
 }
 
@@ -152,7 +160,32 @@ extension GameScene {
 extension GameScene: SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
-        print("contact")
+        
+        let playerMask = PhysicsCatagory.Player
+        let enemyMask = PhysicsCatagory.Enemy
+        let obstacleMask = PhysicsCatagory.Obstacle
+        
+        let nodeA = contact.bodyA.node!
+        let nodeB = contact.bodyB.node!
+        
+        let contactAMAsk = contact.bodyA.categoryBitMask
+        let contactBMAsk = contact.bodyB.categoryBitMask
+        
+        let collision = contactAMAsk | contactBMAsk
+        
+        switch collision {
+        case playerMask | enemyMask:
+            print("player & enemy")
+            
+        case playerMask | obstacleMask:
+            print("player & obstacle")
+            
+        case enemyMask | obstacleMask:
+            print("enemy & obstacle")
+            
+        default:
+            break
+        }
     }
     
 }

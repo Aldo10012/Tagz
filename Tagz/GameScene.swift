@@ -10,6 +10,15 @@ import GameplayKit
 import Darwin
 
 
+/// objects
+///
+/// Speed dampener
+///     reduces speed of other player for 5 seconds
+///
+/// speed down
+///     speeds up whoever collected it for 5 seconds
+
+
 class GameScene: SKScene {
     
     // MARK: Properties
@@ -23,11 +32,11 @@ class GameScene: SKScene {
     // time intervals
     let fixedDelta: CFTimeInterval = 1.0 / 60.0 /* 60 FPS */
     
-    var timeLeft: Double = 10
+    var timeLeft: Double = 30
     
     // Speed
     var playerSpeed: CGFloat = 1
-    var enemySpeed: CGFloat = 0.75
+    var enemySpeed: CGFloat = 0.5
     
     // joystick controller
     var analogJoystick: TLAnalogJoystick = {
@@ -55,7 +64,7 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        rotateEnemyNodeToFacePlayerNode()
+//        rotateEnemyNodeToFacePlayerNode()
         moveEnemyToPLayer()
         
         timeLeft -= 1/60
@@ -79,11 +88,14 @@ class GameScene: SKScene {
             self.playerNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             self.playerNode.physicsBody?.applyImpulse(CGVector(dx: pVelocity.x * self.playerSpeed,
                                                                 dy: pVelocity.y * self.playerSpeed))
-            self.playerNode.zRotation = joystick.angular
+//            self.playerNode.zRotation = joystick.angular
         }
         
-        analogJoystick.on(.end) { [unowned self] joystick in
-            playerNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+        analogJoystick.on(.end) { [weak self] joystick in
+            
+            guard let self = self else {return}
+            
+            self.playerNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         }
         
     }

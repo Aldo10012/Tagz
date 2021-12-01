@@ -15,14 +15,19 @@ class SKButtonLabel: SKLabelNode {
 class GameOverScene: SKScene {
 
     // MARK: Properties
-    
+    var mainLabel = SKLabelNode()
     var playAgain = SKButtonLabel()
     var exitGame  = SKButtonLabel()
+    
+    var title: String = ""
     
     
     // MARK: Life Cycles
     override func didMove(to view: SKView) {
         print("GAME OVER")
+        
+        mainLabel = self.childNode(withName: "mainLabel") as! SKLabelNode
+        mainLabel.text = title
         
         setupButtons()
     }

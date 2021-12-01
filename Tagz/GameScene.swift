@@ -18,8 +18,12 @@ class GameScene: SKScene {
     var playerNode = SKSpriteNode()
     var enemyNode = SKSpriteNode()
     
+    var timeLabel = SKLabelNode()
+    
     // time intervals
     let fixedDelta: CFTimeInterval = 1.0 / 60.0 /* 60 FPS */
+    
+    var timeLeft: Double = 10
     
     // Speed
     var playerSpeed: CGFloat = 1
@@ -41,6 +45,8 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         playerNode = self.childNode(withName: "player") as! SKSpriteNode
         enemyNode = self.childNode(withName: "enemy") as! SKSpriteNode
+        timeLabel = self.childNode(withName: "timeLabel") as! SKLabelNode
+        timeLabel.text = "Time: \(timeLeft) sec"
         
         physicsWorld.contactDelegate = self
         
@@ -51,6 +57,12 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         rotateEnemyNodeToFacePlayerNode()
         moveEnemyToPLayer()
+        
+        timeLeft -= 1/60
+        if timeLeft <= 0 {
+            presentGameOverScene(withTitle: "You Win")
+        }
+        timeLabel.text = "Time: \(Int(timeLeft)+1) sec"
         
     }
     
@@ -177,7 +189,7 @@ extension GameScene: SKPhysicsContactDelegate {
         switch collision {
         case playerMask | enemyMask:
             print("player & enemy")
-            presentGameOverScene()
+            presentGameOverScene(withTitle: "Game Over")
             
         case playerMask | obstacleMask:
             print("player & obstacle")
@@ -190,10 +202,11 @@ extension GameScene: SKPhysicsContactDelegate {
         }
     }
     
-    func presentGameOverScene() {
-        let gameOverScene = GameOverScene(fileNamed: "GameOver")
+    func presentGameOverScene(withTitle title: String) {
+        let gameOverScene = GameOverScene(fileNamed: "GameOver")!
+        gameOverScene.title = title
         
-        gameOverScene!.scaleMode = .aspectFill
+        gameOverScene.scaleMode = .aspectFill
         view?.presentScene(gameOverScene)
     }
     

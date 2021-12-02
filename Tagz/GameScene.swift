@@ -27,6 +27,8 @@ class GameScene: SKScene {
     var playerNode = SKSpriteNode()
     var enemyNode = SKSpriteNode()
     
+    var peperNode = SKSpriteNode()
+    
     var timeLabel = SKLabelNode()
     
     // time intervals
@@ -55,6 +57,7 @@ class GameScene: SKScene {
         playerNode = self.childNode(withName: "player") as! SKSpriteNode
         enemyNode = self.childNode(withName: "enemy") as! SKSpriteNode
         timeLabel = self.childNode(withName: "timeLabel") as! SKLabelNode
+        peperNode = self.childNode(withName: "Peper") as! SKSpriteNode
         timeLabel.text = "Time: \(timeLeft) sec"
         
         physicsWorld.contactDelegate = self
@@ -117,8 +120,29 @@ extension GameScene {
         
         enemyNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         
-        let enemyImpulse = setEnemyImpulse(dx: dx, dy: dy)
-        enemyNode.physicsBody?.applyImpulse(enemyImpulse)
+        // check if peper is near enemy:
+        // if so, enemy moves to peper
+        // if not, enemy moves to player
+        
+        if childNode(withName: "Peper") != nil {
+            let peperDx = peperNode.position.x - enemyNode.position.x
+            let peperDy = peperNode.position.y - enemyNode.position.y
+            let peperHyp = sqrt((peperDx * peperDx) + (peperDy * peperDy))
+            
+            if peperHyp < 200 {
+                let enemyImpulse = setEnemyImpulse(dx: peperDx, dy: peperDy)
+                enemyNode.physicsBody?.applyImpulse(enemyImpulse)
+            } else {
+                let enemyImpulse = setEnemyImpulse(dx: dx, dy: dy)
+                enemyNode.physicsBody?.applyImpulse(enemyImpulse)
+            }
+        }
+        else {
+            let enemyImpulse = setEnemyImpulse(dx: dx, dy: dy)
+            enemyNode.physicsBody?.applyImpulse(enemyImpulse)
+        }
+        
+        
     }
     
     
@@ -178,6 +202,10 @@ extension GameScene {
             objectNode.physicsBody?.collisionBitMask = PhysicsCatagory.Enemy | PhysicsCatagory.Player
             objectNode.physicsBody?.contactTestBitMask = PhysicsCatagory.Enemy  | PhysicsCatagory.Player
         }
+        
+        peperNode.physicsBody?.categoryBitMask = PhysicsCatagory.Obstacle
+        peperNode.physicsBody?.collisionBitMask = PhysicsCatagory.Player | PhysicsCatagory.Enemy
+        peperNode.physicsBody?.contactTestBitMask = PhysicsCatagory.Player | PhysicsCatagory.Enemy
     }
 }
 
@@ -206,8 +234,20 @@ extension GameScene: SKPhysicsContactDelegate {
         case playerMask | obstacleMask:
             print("player & obstacle")
             
+            if nodeA == peperNode || nodeB == peperNode {
+                print("player & peper")
+                playerSpeed *= 2
+                peperNode.removeFromParent()
+            }
+            
         case enemyMask | obstacleMask:
             print("enemy & obstacle")
+            
+            if nodeA == peperNode || nodeB == peperNode {
+                print("enemy & peper")
+                enemySpeed *= 2
+                peperNode.removeFromParent()
+            }
             
         default:
             break

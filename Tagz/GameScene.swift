@@ -28,6 +28,8 @@ class GameScene: SKScene {
     var enemyNode = SKSpriteNode()
     
     var peperNode = SKSpriteNode()
+//    var iceOne = SKSpriteNode()
+//    var iceTwo = SKSpriteNode()
     
     var timeLabel = SKLabelNode()
     
@@ -38,7 +40,7 @@ class GameScene: SKScene {
     
     // Speed
     var playerSpeed: CGFloat = 1
-    var enemySpeed: CGFloat = 0.5
+    var enemySpeed: CGFloat = 0.4
     
     // joystick controller
     var analogJoystick: TLAnalogJoystick = {
@@ -58,6 +60,9 @@ class GameScene: SKScene {
         enemyNode = self.childNode(withName: "enemy") as! SKSpriteNode
         timeLabel = self.childNode(withName: "timeLabel") as! SKLabelNode
         peperNode = self.childNode(withName: "Peper") as! SKSpriteNode
+//        iceOne = self.childNode(withName: "Icecube_1") as! SKSpriteNode
+//        iceTwo = self.childNode(withName: "Icecube_2") as! SKSpriteNode
+        
         timeLabel.text = "Time: \(timeLeft) sec"
         
         physicsWorld.contactDelegate = self
@@ -206,6 +211,12 @@ extension GameScene {
         peperNode.physicsBody?.categoryBitMask = PhysicsCatagory.Obstacle
         peperNode.physicsBody?.collisionBitMask = PhysicsCatagory.Player | PhysicsCatagory.Enemy
         peperNode.physicsBody?.contactTestBitMask = PhysicsCatagory.Player | PhysicsCatagory.Enemy
+        
+        enumerateChildNodes(withName: "Icecube") { iceCube, _ in
+            iceCube.physicsBody?.categoryBitMask = PhysicsCatagory.Obstacle
+            iceCube.physicsBody?.collisionBitMask = PhysicsCatagory.Player | PhysicsCatagory.Enemy
+            iceCube.physicsBody?.contactTestBitMask = PhysicsCatagory.Player | PhysicsCatagory.Enemy
+        }
     }
 }
 
@@ -233,11 +244,19 @@ extension GameScene: SKPhysicsContactDelegate {
             
         case playerMask | obstacleMask:
             print("player & obstacle")
+            print(nodeA.name, nodeB.name)
             
             if nodeA == peperNode || nodeB == peperNode {
                 print("player & peper")
                 playerSpeed *= 2
                 peperNode.removeFromParent()
+            }
+            
+            if nodeA.name == "Icecube" || nodeB.name == "Icecube" {
+                print("player & cube")
+                playerSpeed /= 2
+                removeIceCube()
+                
             }
             
         case enemyMask | obstacleMask:
@@ -249,8 +268,23 @@ extension GameScene: SKPhysicsContactDelegate {
                 peperNode.removeFromParent()
             }
             
+            if nodeA.name == "Icecube" || nodeB.name == "Icecube" {
+                print("enemy & ice cube")
+                enemySpeed /= 2
+                removeIceCube()
+            }
+            
         default:
             break
+        }
+        
+        
+        func removeIceCube() {
+            if nodeA.name == "Icecube" {
+                nodeA.removeFromParent()
+            } else {
+                nodeB.removeFromParent()
+            }
         }
     }
     
@@ -261,6 +295,8 @@ extension GameScene: SKPhysicsContactDelegate {
         gameOverScene.scaleMode = .aspectFill
         view?.presentScene(gameOverScene)
     }
+    
+    
     
 }
 

@@ -21,6 +21,7 @@
 		6343CDD8274EFF41008B2140 /* AnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343CDD7274EFF41008B2140 /* AnalogJoystick.swift */; };
 		634C7F6327581AB1006900FB /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 634C7F6227581AB1006900FB /* GameOver.sks */; };
 		634C7F6527581C6A006900FB /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C7F6427581C6A006900FB /* GameOverScene.swift */; };
+		63792802275AE5D6000D4399 /* SnowEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63792801275AE5D6000D4399 /* SnowEffect.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		6343CDD7274EFF41008B2140 /* AnalogJoystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystick.swift; sourceTree = "<group>"; };
 		634C7F6227581AB1006900FB /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		634C7F6427581C6A006900FB /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		63792801275AE5D6000D4399 /* SnowEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SnowEffect.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			children = (
 				6343CDA4274EF8BB008B2140 /* AppDelegate.swift */,
 				6343CDA6274EF8BB008B2140 /* GameScene.sks */,
+				63792801275AE5D6000D4399 /* SnowEffect.sks */,
 				634C7F6227581AB1006900FB /* GameOver.sks */,
 				6343CDA8274EF8BB008B2140 /* Actions.sks */,
 				6343CDAA274EF8BB008B2140 /* GameScene.swift */,
@@ -245,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				634C7F6327581AB1006900FB /* GameOver.sks in Resources */,
+				63792802275AE5D6000D4399 /* SnowEffect.sks in Resources */,
 				6343CDB0274EF8BB008B2140 /* Main.storyboard in Resources */,
 				6343CDA7274EF8BB008B2140 /* GameScene.sks in Resources */,
 				6343CDB2274EF8BD008B2140 /* Assets.xcassets in Resources */,

@@ -27,11 +27,13 @@ class GameScene: SKScene {
     var playerNode = SKSpriteNode()
     var enemyNode = SKSpriteNode()
     
+    // obstacles
     var peperNode = SKSpriteNode()
-//    var iceOne = SKSpriteNode()
-//    var iceTwo = SKSpriteNode()
     
     var timeLabel = SKLabelNode()
+    
+    // particles
+    let snowEffect = SKEffectNode(fileNamed: "SnowEffect")
     
     // time intervals
     let fixedDelta: CFTimeInterval = 1.0 / 60.0 /* 60 FPS */
@@ -67,6 +69,9 @@ class GameScene: SKScene {
         
         physicsWorld.contactDelegate = self
         
+        spawnParticles()
+        
+        
         configurePhysicsBody()
         setupJoyStick()
     }
@@ -81,6 +86,16 @@ class GameScene: SKScene {
         }
         timeLabel.text = "Time: \(Int(timeLeft)+1) sec"
         
+    }
+    
+    func spawnParticles() {
+        // spawn snow effect
+        enumerateChildNodes(withName: "Icecube") { iceCube, _ in
+            let snow = SKEffectNode(fileNamed: "SnowEffect")
+            snow?.position = iceCube.position
+            snow?.name = "SnowEffect"
+            self.addChild(snow!)
+        }
     }
     
     // MARK: JoyStick Controlls
@@ -280,11 +295,23 @@ extension GameScene: SKPhysicsContactDelegate {
         
         
         func removeIceCube() {
+            removeSnowEffect()
             if nodeA.name == "Icecube" {
                 nodeA.removeFromParent()
             } else {
                 nodeB.removeFromParent()
             }
+        }
+        
+        func removeSnowEffect() {
+            enumerateChildNodes(withName: "SnowEffect") { snow, _ in
+                print(snow)
+                if nodeA.position == snow.position || nodeB.position == snow.position {
+                    snow.removeFromParent()
+                }
+            }
+            
+            
         }
     }
     

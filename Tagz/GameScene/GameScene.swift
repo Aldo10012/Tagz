@@ -25,7 +25,7 @@ class GameScene: SKScene {
     
     // Nodes
     var playerNode = SKSpriteNode()
-    var enemyNode = SKSpriteNode()
+    public var enemyNode = SKSpriteNode()
     
     // obstacles
     var peperNode = SKSpriteNode()
@@ -38,7 +38,7 @@ class GameScene: SKScene {
     // time intervals
     let fixedDelta: CFTimeInterval = 1.0 / 60.0 /* 60 FPS */
     
-    var timeLeft: Double = 30
+    public var timeLeft: Double = 30
     
     // Speed
     var playerSpeed: CGFloat = 1

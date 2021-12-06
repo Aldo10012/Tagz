@@ -68,9 +68,9 @@ class GameOverScene: SKScene {
         
         exitGame.touchupInside = {
             print("this leads to home page.")
-//            let gameOverScene = SKScene(fileNamed: "GameScene")
-//            gameOverScene?.scaleMode = .aspectFill
-//            self.view?.presentScene(gameOverScene)
+            let gameOverScene = SKScene(fileNamed: "HomeScene")
+            gameOverScene?.scaleMode = .aspectFill
+            self.view?.presentScene(gameOverScene)
         }
     }
     

@@ -22,6 +22,8 @@
 		634C7F6327581AB1006900FB /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 634C7F6227581AB1006900FB /* GameOver.sks */; };
 		634C7F6527581C6A006900FB /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C7F6427581C6A006900FB /* GameOverScene.swift */; };
 		63792802275AE5D6000D4399 /* SnowEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63792801275AE5D6000D4399 /* SnowEffect.sks */; };
+		63ADA67D275EBB66004C9691 /* HomeScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63ADA67C275EBB66004C9691 /* HomeScene.sks */; };
+		63ADA67F275EBB98004C9691 /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ADA67E275EBB98004C9691 /* HomeScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		634C7F6227581AB1006900FB /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		634C7F6427581C6A006900FB /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		63792801275AE5D6000D4399 /* SnowEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SnowEffect.sks; sourceTree = "<group>"; };
+		63ADA67C275EBB66004C9691 /* HomeScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomeScene.sks; sourceTree = "<group>"; };
+		63ADA67E275EBB98004C9691 /* HomeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,13 +115,12 @@
 			isa = PBXGroup;
 			children = (
 				6343CDA4274EF8BB008B2140 /* AppDelegate.swift */,
-				6343CDA6274EF8BB008B2140 /* GameScene.sks */,
-				63792801275AE5D6000D4399 /* SnowEffect.sks */,
-				634C7F6227581AB1006900FB /* GameOver.sks */,
 				6343CDA8274EF8BB008B2140 /* Actions.sks */,
-				6343CDAA274EF8BB008B2140 /* GameScene.swift */,
-				634C7F6427581C6A006900FB /* GameOverScene.swift */,
 				6343CDAC274EF8BB008B2140 /* GameViewController.swift */,
+				63ADA67B275EBB39004C9691 /* Home */,
+				63ADA678275EBAB4004C9691 /* GameScene */,
+				63ADA679275EBAC8004C9691 /* GameOver */,
+				63ADA67A275EBAF7004C9691 /* Particles */,
 				6343CDD7274EFF41008B2140 /* AnalogJoystick.swift */,
 				6343CDAE274EF8BB008B2140 /* Main.storyboard */,
 				6343CDB1274EF8BD008B2140 /* Assets.xcassets */,
@@ -141,6 +144,41 @@
 				6343CDCA274EF8BE008B2140 /* TagzUITestsLaunchTests.swift */,
 			);
 			path = TagzUITests;
+			sourceTree = "<group>";
+		};
+		63ADA678275EBAB4004C9691 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				6343CDA6274EF8BB008B2140 /* GameScene.sks */,
+				6343CDAA274EF8BB008B2140 /* GameScene.swift */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
+		63ADA679275EBAC8004C9691 /* GameOver */ = {
+			isa = PBXGroup;
+			children = (
+				634C7F6227581AB1006900FB /* GameOver.sks */,
+				634C7F6427581C6A006900FB /* GameOverScene.swift */,
+			);
+			path = GameOver;
+			sourceTree = "<group>";
+		};
+		63ADA67A275EBAF7004C9691 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				63792801275AE5D6000D4399 /* SnowEffect.sks */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
+		63ADA67B275EBB39004C9691 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				63ADA67C275EBB66004C9691 /* HomeScene.sks */,
+				63ADA67E275EBB98004C9691 /* HomeScene.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +288,7 @@
 				634C7F6327581AB1006900FB /* GameOver.sks in Resources */,
 				63792802275AE5D6000D4399 /* SnowEffect.sks in Resources */,
 				6343CDB0274EF8BB008B2140 /* Main.storyboard in Resources */,
+				63ADA67D275EBB66004C9691 /* HomeScene.sks in Resources */,
 				6343CDA7274EF8BB008B2140 /* GameScene.sks in Resources */,
 				6343CDB2274EF8BD008B2140 /* Assets.xcassets in Resources */,
 				6343CDB5274EF8BD008B2140 /* LaunchScreen.storyboard in Resources */,
@@ -281,6 +320,7 @@
 				634C7F6527581C6A006900FB /* GameOverScene.swift in Sources */,
 				6343CDAB274EF8BB008B2140 /* GameScene.swift in Sources */,
 				6343CDD8274EFF41008B2140 /* AnalogJoystick.swift in Sources */,
+				63ADA67F275EBB98004C9691 /* HomeScene.swift in Sources */,
 				6343CDAD274EF8BB008B2140 /* GameViewController.swift in Sources */,
 				6343CDA5274EF8BB008B2140 /* AppDelegate.swift in Sources */,
 			);

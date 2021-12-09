@@ -102,6 +102,22 @@ class GameScene: SKScene {
     func setupJoyStick() {
         addChild(analogJoystick)
         
+        analogJoystick.on(.begin) { [weak self] joystick in
+            
+            guard let self = self else {return}
+            
+            self.run(
+                .repeatForever(
+                    .sequence([
+                        Sound.WalkingOnGrass.action,
+                        .wait(forDuration: 0.3)
+                    ])
+                ),
+                withKey: "WalkingOnGrass"
+            )
+        }
+        
+        
         // runs when joystick moves
         analogJoystick.on(.move) { [weak self] joystick in
             let pVelocity = joystick.velocity;
@@ -112,6 +128,8 @@ class GameScene: SKScene {
             self.playerNode.physicsBody?.applyImpulse(CGVector(dx: pVelocity.x * self.playerSpeed,
                                                                 dy: pVelocity.y * self.playerSpeed))
 //            self.playerNode.zRotation = joystick.angular
+           
+            
         }
         
         analogJoystick.on(.end) { [weak self] joystick in
@@ -119,10 +137,13 @@ class GameScene: SKScene {
             guard let self = self else {return}
             
             self.playerNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            self.removeAction(forKey: "WalkingOnGrass")
         }
         
     }
 }
+
+
 
 
 // MARK: Enemy Mechanics
